@@ -9,18 +9,19 @@ This Project is to design temperature control system using two ATMega32 microcon
 - Analyze the waveform of motors signal using oscilloscope
 
 # Master Chip
-- Receives two temperature values A and B from LM35 sensors
-- Compares the two values using AC
-- As long as A is higher than B, converts the analog value of A to digital using ADC
-- Prints the digital value of A on a 16x2 alphanumeric LCD
-- Sends the digital value of A to the slave
+- Receives Actual temperature value (A) from LM35 sensors
+- converts the analog value of (A) to digital using ADC
+- Prints the digital value of (A) on a 16x2 alphanumeric LCD
+- Takes the optimum degree (B) from LCD
+- Send digital value of (A) to the slave with the optimum degree (B) through SPI communication protocol
 
 # Slave Chip
-- Receives the temperature value from the master
-- Turn on the cooler motor for temperatures between 25 and 55 degrees (starting with a
+- Receives the temperature value from the master through SPI communication protocol
+- Turn on the cooler motor for temperatures between (optimum degree (B)+5) and (optimum degree (B)+10) degrees (starting with a
 duty cycle of 50% plus 10% for every additional 5 degrees)
-- Turn on the heater when the temperature is lower than 20 degrees
-- Red warning LED blink when the temperature is higher than 55 degrees
+- Turn on the heater when the temperature is lower than (optimum-5) degrees and turn on the cooler motor (starting with a
+duty cycle of 50% plus 10% for every additional 5 degrees)
+- Red warning LED blink when the temperature is higher than (optimum degree (B)+10) degrees and 
 - When one motor is on, the other motor should be off
 
 # Design
